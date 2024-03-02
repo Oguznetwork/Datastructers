@@ -1,0 +1,94 @@
+#include<iostream>
+using namespace std;
+typedef struct Dugum{
+    int data;
+    struct Dugum *next;
+
+};
+
+struct Dugum *ust=NULL;
+
+void ekle(int key)
+{
+    struct Dugum *eleman=new Dugum();
+    eleman->data=key;
+    eleman->next=ust;
+    ust=eleman;
+};
+
+void al()
+{
+    if(ust==NULL)
+    {
+        cout<<"liste bos"<<endl;
+    }
+
+    else
+    {
+        cout<<ust->data<<" ";
+        ust=ust->next;
+
+    }
+
+}
+
+void listele()
+{
+    if(ust==NULL)
+    {
+        cout<<"liste bos"<<endl;
+    }
+    else
+    {
+        struct Dugum *temp=ust;
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<" ";
+            temp=temp->next;
+        }
+    }
+}
+
+void bosalt()
+{
+    ust->next=NULL;
+    ust=NULL;
+}
+
+
+
+int main() {
+ int secim, val;
+
+ while(1)
+
+ {
+
+ cout<<"1) Yigina Gonder"<<endl;
+ cout<<"2) Yigindan Al"<<endl;
+ cout<<"3) Listele"<<endl;
+ cout<<"4) Yigini bosalt"<<endl;
+ cout<<"5) Cikis"<<endl;
+cin>>secim;
+
+ switch(secim) {
+ case 1: {
+ cout<<"Yigina gonderilecek elemani giriniz:"<<endl;
+ cin>>val; ekle(val); break; }
+ case 2: {
+ al(); break;}
+ case 3: {
+ listele(); break;}
+ case 4: {
+ bosalt();cout<<"Yigin Bosaltildi : "<<endl; break;}
+ case 5: {
+ cout<<"Cikis"<<endl; break; }
+ default: { cout<<"Hatali secim"<<endl; }
+
+ }
+
+
+}
+
+return 0;
+}
