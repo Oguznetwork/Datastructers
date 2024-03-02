@@ -1,0 +1,117 @@
+#include <iostream>
+
+using namespace std;
+
+struct Dugum{
+int data;
+struct Dugum *sonraki;
+};
+
+struct Dugum *ilk=NULL;
+struct Dugum *son=NULL;
+
+
+void ekle(int deger){
+    struct Dugum *yenidugum=new Dugum();
+    yenidugum->data=deger;
+
+    if(ilk!=NULL)
+    {
+        son->sonraki=yenidugum;
+        son=yenidugum;
+        son->sonraki=NULL;
+    }
+    else
+    {
+        ilk=yenidugum;
+        son=ilk;
+        ilk->sonraki=NULL;
+    }
+}
+
+    void al()
+    {
+        if(ilk==NULL)
+       {
+
+            cout<<"liste bos"<<endl;
+    	}
+
+    else
+    {
+        cout<<"kuyruk bilgisi"<<ilk->data<<endl;
+        ilk=ilk->sonraki;
+    }
+            }
+
+
+    void listele()
+	{
+        struct Dugum *temp=ilk;
+        if(ilk==NULL)
+        {
+            cout<<"KUYRUK BOS"<<endl;
+        }
+        else
+        {
+            struct  Dugum *temp2=ilk;
+            while(temp2!=NULL)
+            {
+                cout<<temp2->data<<" ";
+                temp2=temp2->sonraki;
+            }
+
+        }
+        cout<<endl;
+    }
+
+    void bosalt()
+    {
+        while(ilk!=NULL)
+        {
+            struct Dugum *tmp=ilk;
+            tmp=tmp->sonraki;
+            delete(tmp);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+int main() {
+ int secim, val;
+ while(1){
+
+ cout<<"1) Kuyruga Gonder"<<endl;
+ cout<<"2) Kuyruktan Al"<<endl;
+ cout<<"3) Listele"<<endl;
+ cout<<"4) Kuyrugu bosalt"<<endl;
+ cout<<"5) Cikis"<<endl;
+
+ cout<<"Seciminizi Yapiniz : "<<endl;
+ cin>>secim;
+ switch(secim) {
+ case 1: {cout<<"Kuyruga gonderilecek elemani giriniz:"<<endl;cin>>val;
+ ekle(val); break;}
+ case 2:  al();break;
+ case 3:  listele();
+ break;
+ case 4:
+ bosalt();cout<<"Kuyruk Bosaltildi : "<<endl;
+ break;
+ case 5:
+ cout<<"Cikis"<<endl;
+ break;
+ }
+}
+
+
+
+return 0;
+}
