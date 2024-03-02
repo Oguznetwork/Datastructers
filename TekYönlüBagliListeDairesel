@@ -1,0 +1,354 @@
+#include <iostream>
+
+using namespace std;
+
+struct node{
+    int data;
+    struct node *next;
+};
+
+ struct node *head=NULL;
+   void basaEkle(int key){
+
+
+        struct node *eleman=new node();
+        eleman->data=key;
+        if(head==NULL)
+        {
+            head=eleman;
+            eleman->next=head;
+            cout<<eleman->data<<" kayit eklendi " << endl;
+
+        }
+        else
+            {
+               if(head->next==head)
+               {
+                   cout<<"listede tek eleman vardir"<<endl;
+                   eleman->next=head;
+                   head->next=eleman;
+                   head=eleman;
+                   cout<<eleman->data<<" kayit basa eklendi " <<endl;
+
+               }
+
+               else
+               {
+                   struct node *temp=head;
+                   while(head->next!=head)
+                   {
+                       temp=temp->next;
+
+                   }
+
+                   eleman->next=head;
+                   head=eleman;
+                   temp->next=head;
+                  cout<<eleman->data<<" kayit basa eklendi " <<endl;;
+
+                   }
+            }
+    }
+   void sonaEkle(int key){
+
+
+                struct node *eleman=new node();
+                eleman->data=key;
+                if(head==NULL)
+                {
+
+                    head=eleman;
+                    head->next=head;
+                    cout<<eleman->data<<" kayit eklendi " << endl;
+
+                }
+
+                else{
+                    if(head->next=head)
+                    {
+                        head->next=eleman;
+                        eleman->next=head;
+                    cout<<eleman->data<<" kayit sona eklendi " << endl;
+
+
+                    }
+
+                    else{
+                        struct node *temp=head;
+                        while(head->next!=head)
+                        {
+
+                            temp=temp->next;
+                        }
+
+                        temp->next=eleman;
+                        eleman->next=head;
+
+                        cout<<eleman->data<<" kayit sona eklendi " << endl;
+
+
+                    }
+                  }
+                }
+   void arayaEkle(int key,int sayi){
+
+        bool sonuc=false;
+        struct node *eleman=new node();
+        eleman->data=key;
+        if(head==NULL)
+        {
+            cout<<"liste bos"<<endl;
+            head=eleman;
+            eleman->next=head;
+            cout<<eleman->data<<" kayit eklendi " << endl;
+
+        }
+        else
+            {
+               if(head->next==head)
+               {
+                   cout<<"listede tek eleman vardir"<<endl;
+                   eleman->next=head;
+                   head->next=eleman;
+                   head=eleman;
+                   cout<<eleman->data<<" kayit basa eklendi " << endl;
+
+               }
+
+               else
+               {
+                   struct node *temp=head;
+                   while(temp->next!=head)
+                   {
+                       if(temp->next->data==sayi)
+                       {
+
+                           struct node *temp2=temp;
+                           struct node *temp3=temp->next;
+                           temp2->next=eleman;
+                           eleman->next=temp3;
+                           cout<<"araya eleman eklendi"<<endl;
+                           sonuc=true;
+                           break;
+                       }
+                       temp=temp->next;
+                   }
+
+
+                   }
+                   if(!sonuc)
+                    cout<<"ekleme yapilamadi"<<endl;
+            }
+    }
+   void yazdir(){
+
+    struct node *temp=head;
+    if(head==NULL)
+    {
+        cout<<"liste bos"<<endl<<endl;
+    }
+    else
+        {
+            while(temp->next!=head)
+            {
+                cout<<temp->data<< " " << endl;
+                temp=temp->next;
+            }
+
+                cout<<temp->data<< " " << endl ;
+        }
+}
+
+  void bastanSil(){
+      bool sonuc=false;
+
+    struct node *temp=head;
+    if(head==NULL)
+    {
+        cout<<"liste bos"<<endl;
+        sonuc=true;
+    }
+    else
+        {
+            if(head->next==head)
+                {
+                cout<<"listedeki tek dugum silindi"<<endl;
+                delete head;
+                head=NULL;
+
+                }
+
+                        else
+                        {
+                        while(temp->next!=head)
+                            {
+                                temp=temp->next;
+                            }
+
+                        struct node *temp2=head->next;
+                        delete head;
+                        head=temp2;
+                        temp->next=head;
+                        cout<<"listedenin basýndaki eleman silindi"<<endl;
+                                sonuc=true;
+
+
+                        }
+        }
+};
+
+  void sondanSil(){
+    struct node *temp=head;
+    if(head==NULL)
+    {
+        cout<<"liste bos"<<endl;
+    }
+    else
+        {
+            if(head->next==head)
+                {
+                cout<<"listedeki tek dugum silindi"<<endl<<endl;
+                delete head;
+                head=NULL;
+
+                }
+
+                        else
+
+                        {
+                            struct node *temp=head;
+                            while(temp->next->next!=head)
+                            {
+                                temp=temp->next;
+                            }
+                            delete temp->next;
+                            temp->next=head;
+                            cout<<"sondaki dugum silindi"<<endl<<endl;
+
+
+
+                        }
+        }
+
+
+};
+
+
+
+     void aradanSil(int key)
+   {
+       bool sonuc=false;
+       if(head==NULL)
+       {
+           cout<<"liste bos,, silinecek eleman yok"<<endl;
+                   sonuc=true;
+
+       }
+       else
+       {
+           if(head->next==head && head->data==key)
+           {
+               delete head;
+               head=NULL;
+               cout<<"listede kalan son dugum silindi"<<endl;
+                       sonuc=true;
+
+           }
+
+           else
+           {
+               struct node *temp=head;
+               while(temp->next!=head){
+                   if(temp->next->data==key)
+                   {
+                       struct node *temp2=temp;
+                       struct node *temp3=temp->next->next;
+                       delete temp->next;
+                       temp2->next=temp3;
+                       cout<<"aradaki dugum silindi"<<endl;
+                               sonuc=true;
+
+
+                   }
+                   temp=temp->next;
+               }
+
+
+
+
+
+           }
+           if(!sonuc)
+           {
+               cout<<key<< " degerli dugum listede YOKTUR !!!";
+           }
+       }
+   }
+int main()
+{
+    int sayi,secim,sayi2;
+    while(1)
+    {
+        cout<<endl;
+        cout<<"TYDBL uygulamasi " <<endl;
+        cout<<"1--> basa ekle"<<endl;
+        cout<<"2--> sona ekle"<<endl;
+        cout<<"3-->araya ekle"<<endl;
+        cout<<"4-->bastan sil"<<endl;
+        cout<<"5-->sondan sil"<<endl;
+        cout<<"6-->aradan eleman sil"<<endl;
+        cout<<"7--> yazdir " << endl;
+        cin>>secim;
+
+switch(secim)
+        {
+            case 1: cout <<"basa eklenecek sayi : ";
+            cin>>sayi;
+            basaEkle(sayi);
+            cout<<endl;
+            break;
+
+            case 2: cout<<"sona eklenecek sayi: ";
+            cin>>sayi;
+            sonaEkle(sayi);
+            cout<<endl;
+            break;
+
+            case 3: cout <<" araya eklenecek sayi: ";
+            cin>>sayi;
+            cout<<endl;
+            cout<<"hangi sayidan once eklensin";
+            cin>>sayi2;
+            arayaEkle(sayi,sayi2);
+            cout<<endl;
+            break;
+
+            case 4: bastanSil();
+            cout<<endl;
+            break;
+
+
+            case 5: sondanSil();
+            cout<<endl;
+            break;
+
+            case 6: cout<<"silmek istediginiz sayi nedir"<<endl;
+            cin>>sayi;
+            aradanSil(sayi);
+            break;
+
+            case 7: yazdir();
+
+            break;
+
+        }
+    }
+
+
+
+
+
+
+
+    return 0;
+}
